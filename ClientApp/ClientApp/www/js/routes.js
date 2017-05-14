@@ -17,13 +17,13 @@ angular.module('app.routes', [])
   })
 
   .state('register', {
-    url: '/form',
+    url: '/register',
     templateUrl: 'templates/register.html',
     controller: 'registerCtrl'
   })
 
   .state('login', {
-    url: '/form',
+    url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
@@ -34,7 +34,7 @@ angular.module('app.routes', [])
     controller: 'collectiveAgreementCtrl'
   })
 
-$urlRouterProvider.otherwise('/form')
+$urlRouterProvider.otherwise('/login')
 
   
 
