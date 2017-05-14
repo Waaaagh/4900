@@ -1,19 +1,25 @@
 <ion-view title="Login" id="page3">
-  <ion-content padding="true" class="has-header">
-    <form id="login-form6" class="list">
-      <ion-list id="login-list1">
-        <label class="item item-input" id="login-input8">
-          <span class="input-label">Employee Number </span>
-          <input type="text" placeholder="">
-        </label>
-        <label class="item item-input" id="login-input9">
-          <span class="input-label">Password</span>
-          <input type="password" placeholder="">
-        </label>
-      </ion-list>
-      <div class="spacer" style="height: 30px;"></div>
-      <button id="login-button16" class="button button-dark  button-block">Log in</button>
-      <a ui-sref="register" id="login-button17" class="button button-positive  button-block button-clear">Register </a>
-    </form>
-  </ion-content>
+    <ion-content padding="true" class="has-header">
+        <form id="login-form6" class="list" ng-submit="submit()">
+            <ion-list id="login-list1">
+                <label class="item item-input" id="login-input8">
+                    <span class="input-label">Employee Number </span>
+                    <input type="text" placeholder="" ng-model="data.account">
+                </label>
+                <label class="item item-input" id="login-input9">
+                    <span class="input-label">Password</span>
+                    <input type="password" placeholder="" ng-model="data.password">
+                </label>
+            </ion-list>
+            <div class="spacer" style="height: 30px;"></div>
+            <button id="login-button16" class="button button-dark  button-block" type="submit">Log in</button>
+            <a ui-sref="register" id="login-button17" class="button button-positive  button-block button-clear">Register </a>
+        </form>
+        <!-- For Debugging -->
+        <div class="card">
+            <div class="item item-text-wrap">
+                Response: <b ng-bind="response"></b>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
