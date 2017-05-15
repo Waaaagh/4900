@@ -7,28 +7,28 @@
       <form id="register-form8" class="list">
         <div class="spacer" style="height: 10px;"></div>
         <label class="item item-input" id="register-input1" name="firstname">
-          <input type="text" placeholder="First Name">
+          <input type="text" placeholder="First Name" required ng-model="data.fname">
         </label>
         <label class="item item-input" id="register-input4" name="lastname">
-          <input type="text" placeholder="Last Name">
+          <input type="text" placeholder="Last Name" required ng-model="data.lname">
         </label>
         <label class="item item-input" id="register-input10" name="employeenumber">
-          <input type="text" placeholder="Employee Number">
+          <input type="text" placeholder="Employee Number" required ng-maxlength="9" ng-minlength="9" ng-model="data.personnelNum">
         </label>
         <label class="item item-input" id="register-input5" name="password">
-          <input type="text" placeholder="Password">
+          <input type="text" placeholder="Password" required ng-model="data.password">
         </label>
         <label class="item item-input" id="register-input12">
-          <input type="tel" placeholder="Phone Number">
+          <input type="tel" placeholder="Phone Number" required ng-model="data.phoneNum">
         </label>
       </form>
     </div>
-    <form id="register-form3" class="list">
+    <form id="register-form3" class="list" ng-submit="submit()">
       <div class="spacer" style="height: 15px;"></div>
       <label class="item item-select" id="register-select1" name="location">
         <span class="input-label">Location</span>
-        <select>
-          <option>Vancouver</option>
+        <select ng-model="data.location">
+          <option selected>Vancouver</option>
           <option>Fraser Valley</option>
           <option>Kelowna</option>
           <option>Royal City</option>
@@ -37,8 +37,8 @@
       </label>
       <label class="item item-select" id="register-select2" name="depot">
         <span class="input-label">Depot</span>
-        <select>
-          <option>New West</option>
+        <select ng-model="data.depot">
+          <option selected>New West</option>
           <option>ODC</option>
           <option>NFDD</option>
           <option>LCD1</option>
@@ -48,15 +48,15 @@
       </label>
       <label class="item item-select" id="register-select3" name="position">
         <span class="input-label">Position</span>
-        <select>
-          <option>Term</option>
+        <select ng-model="data.position">
+          <option selected>Term</option>
           <option>Shop Steward</option>
           <option>LC</option>
           <option>PO4</option>
           <option>GL</option>
         </select>
       </label>
-      <button id="register-button15" class="button button-dark button-large button-block">Register</button>
+      <button id="register-button15" class="button button-dark button-large button-block" type="submit">Register</button>
       <div id="register-button-bar2" class="button-bar"></div>
     </form>
       <!-- For Debugging -->
