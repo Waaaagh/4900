@@ -1,18 +1,28 @@
 <ion-view title="Login" id="page3">
     <ion-content padding="true" class="has-header">
-        <form id="login-form6" class="list" ng-submit="submit()">
+        <form id="login-form6" class="list" ng-submit="signIn(login-form6)">
             <ion-list id="login-list1">
-                <label class="item item-input" id="login-input8">
-                    <span class="input-label">Employee Number </span>
-                    <input type="text" placeholder="" required ng-model="data.account">
+                <label class="item item-input" id="login-input8" ng-class="{ 'has-errors' : login-form6.account.$invalid, 'no-errors' : login-form6.account.$valid}">
+                    <span class="input-label">Personnel Number </span>
+                    <input type="text" placeholder="" ng-model="data.account" ng-minlength="9" ng-maxlength="9" required>
                 </label>
-                <label class="item item-input" id="login-input9">
+
+                <div class="error-container" ng-show="login-form6.account.$error" ng-messages="login-form6.account.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+
+                <label class="item item-input" id="login-input9" ng-class="{ 'has-errors' : login-form6.password.$invalid, 'no-errors' : login-form6.password.$valid}">
                     <span class="input-label">Password</span>
-                    <input type="password" placeholder="" required ng-model="data.password">
+                    <input type="password" placeholder="" ng-model="data.password" required>
                 </label>
+
+                <div class="error-container" ng-show="login-form6.password.$error" ng-messages="login-form6.password.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+
             </ion-list>
             <div class="spacer" style="height: 30px;"></div>
-            <button ui-sref="homePage" id="login-button16" class="button button-dark  button-block" type="submit">Log in</button>
+            <button id="login-button16" class="button button-dark  button-block" type="submit">Log in</button>
             <!--<a ui-sref="homePage" id="login-button16" class="button button-dark  button-block" ng-click="tryLogin()">Log in</a>-->
             <a ui-sref="register" id="login-button17" class="button button-positive  button-block button-clear">Register </a>
         </form>

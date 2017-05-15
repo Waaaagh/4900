@@ -46,22 +46,22 @@ function ($scope, $stateParams, $http) {
 
     //});
 
+    $scope.data = {
+        account: '',
+        password: ''
+    };
+
+    $scope.signIn = function (form) {
+        if (form.$valid) {
+            $state.go('homePage');
+        }
+    };
+
     $scope.data = {};
-    //var permissions = cordova.plugins.permissions;
     $scope.submit = function () {
-        //permissions.requestPermission(cordova.plugins.permissions.INTERNET, success, error);
-        ////cordova.requestPermission(CordovaPlugin plugin, int requestCode, String permission);
-
-        //function error() {
-        //    alert('Internet permission is not turned on');
-        //}
-
-        //function success(status) {
-        //    alert("Request Success");
-        //    if (!status.hasPermission) error();
-        //}
 
         var link = 'http://ebon1111.000webhostapp.com/login.php';
+        alert("Request sent");
         $http({
             url: link,
             method: 'POST',
@@ -73,7 +73,7 @@ function ($scope, $stateParams, $http) {
             $scope.response = data;
             $scope.response += " : " + status;
         });
-        alert("Request sent");
+        
         //$http.post(link, { account: $scope.data.account, password: $scope.data.password }).then(function (res) {
         //    $scope.response = res.data;
         //});
