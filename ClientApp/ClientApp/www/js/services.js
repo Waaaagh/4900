@@ -6,4 +6,10 @@ angular.module('app.services', [])
 
 .service('BlankService', [function(){
 
-}]);
+}])
+
+.service('LoginService', function(scope) {
+  
+    return scope;
+
+});

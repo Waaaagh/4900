@@ -13,7 +13,17 @@ angular.module('app.routes', [])
       .state('homePage', {
     url: '/home',
     templateUrl: 'templates/homePage.html',
-    controller: 'homePageCtrl'
+    controller: 'homePageCtrl',
+    resolve: {
+        function ($q)
+        {
+            var defer = $q.defer();
+
+            defer.resolve(); // call to allow routing
+
+            return defer.promise;
+        }
+    }
   })
 
   .state('register', {
