@@ -38,6 +38,7 @@ function ($scope, $stateParams, $http) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $http) {
 
+
     //var blocker = false;
 
     //$scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -45,17 +46,6 @@ function ($scope, $stateParams, $http) {
     //    if (toState.name === 'register' && blocker) event.preventDefault();
 
     //});
-
-    $scope.data = {
-        account: '',
-        password: ''
-    };
-
-    $scope.signIn = function (form) {
-        if (form.$valid) {
-            $state.go('homePage');
-        }
-    };
 
     $scope.data = {};
     $scope.submit = function () {
@@ -73,7 +63,7 @@ function ($scope, $stateParams, $http) {
             $scope.response = data;
             $scope.response += " : " + status;
         });
-        
+
         //$http.post(link, { account: $scope.data.account, password: $scope.data.password }).then(function (res) {
         //    $scope.response = res.data;
         //});
