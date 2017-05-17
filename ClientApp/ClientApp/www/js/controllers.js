@@ -11,7 +11,6 @@ function ($scope, $stateParams, $http) {
             alert(res.data);
             //$scope.response = res.data;
         });
-        alert("End");
     }
 
 }])
@@ -40,7 +39,7 @@ function ($scope, $stateParams, $http, $state) {
             }
         }).success(function (data, status, headers, config) {
             $scope.response = data;
-            if (data !== "Personnel number exists.") {
+            if (data === $scope.data.fname) {
                 alert("Hello, " + data + "\nPlease Login in the next page.");
                 $state.go('login');
             } else {
@@ -53,20 +52,6 @@ function ($scope, $stateParams, $http, $state) {
             $scope.response = data;
             $scope.response += " : " + status;
         });
-
-        //$http.post(link, {
-        //    fname: $scope.data.fname,
-        //    lname: $scope.data.lname,
-        //    personnelNum: $scope.data.personnelNum,
-        //    password: $scope.data.password,
-        //    phoneNum: $scope.data.phoneNum,
-        //    location: $scope.data.location,
-        //    depot: $scope.data.depot,
-        //    position: $scope.data.position
-        //}).then(function (res) {
-        //    $scope.response = res.data;
-        //    $state.go('login');
-        //});
     };
 }])
 
