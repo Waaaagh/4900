@@ -4,12 +4,25 @@ angular.module('app.controllers', [])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $http) {
-    $scope.compose = function () {
-        alert("Request sent");
-        var link = 'http://ebon1111.000webhostapp.com/mailer.php';
-        $http.post(link, {}).then(function (res) {
-            alert(res.data);
-            //$scope.response = res.data;
+    //$scope.compose = function () {
+    //    alert("Request sent");
+    //    var link = 'http://ebon1111.000webhostapp.com/mailer.php';
+    //    $http.post(link, {}).then(function (res) {
+    //        alert(res.data);
+    //        //$scope.response = res.data;
+    //    });
+    //}
+
+    $scope.pdfviewer = function () {
+        window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + '/www/CA_2016.pdf', function (fileEntry) {
+
+            window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function (dirEntry) {
+
+                fileEntry.copyTo(dirEntry, 'CA_2016.pdf', function (newFileEntry) {
+
+                    cordova.plugins.fileOpener2.open(newFileEntry.nativeURL, 'application/pdf');
+                });
+            });
         });
     }
 
@@ -20,38 +33,94 @@ function ($scope, $stateParams, $http) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $http, $state) {
     $scope.data = {};
+    $scope.locations = [{
+        name: 'Vancouver'
+    }, {
+        name: 'Fraser Valley'
+    }, {
+        name: 'Kelowna'
+    }, {
+        name: 'Royal City'
+    }, {
+        name: 'Mech & Tech'
+    }];
+
+    $scope.depots = [{
+        name: 'New West',
+        belong: 'Fraser Valley'
+    }, {
+        name: 'ODC',
+        belong: 'Vancouver'
+    }, {
+        name: 'NFDD',
+        belong: 'Kelowna'
+    }, {
+        name: 'LCD1',
+        belong: 'Royal City'
+    }, {
+        name: 'White Rock',
+        belong: 'Mech & Tech'
+    }, {
+        name: 'Calgary',
+        belong: 'Fraser Valley'
+    }];
+
+    $scope.checkLocal = function () {
+        $scope.data.depot = null;
+    }
+
+    $scope.regEx = "/^[0-9]{10,10}$/";
 
     $scope.submit = function () {
-        var link = 'http://ebon1111.000webhostapp.com/api.php';
-        //pass all data to server
-        $http({
-            url: link,
-            method: 'POST',
-            data: {
-                fname: $scope.data.fname,
-                lname: $scope.data.lname,
-                personnelNum: $scope.data.personnelNum,
-                password: $scope.data.password,
-                phoneNum: $scope.data.phoneNum,
-                location: $scope.data.location,
-                depot: $scope.data.depot,
-                position: $scope.data.position
-            }
-        }).success(function (data, status, headers, config) {
-            $scope.response = data;
-            if (data === $scope.data.fname) {
-                alert("Hello, " + data + "\nPlease Login in the next page.");
-                $state.go('login');
-            } else {
-                alert(data);
-            }
+         alert($scope.data.fname + "\n" + $scope.data.lname + "\n" + $scope.data.personnelNum + "\n" + $scope.data.password + "\n" + $scope.data.phoneNum + "\n" + $scope.data.loc.name + "\n" + $scope.data.depot + "\n" + $scope.data.position);
 
-        }).error(function (data, status, headers, config) {
-            alert("Connection fails.");
-            //alert("Invalid ID or password.");
-            $scope.response = data;
-            $scope.response += " : " + status;
-        });
+        if ($scope.data.fname === null || !angular.isDefined($scope.data.fname) ||
+            $scope.data.lname === null || !angular.isDefined($scope.data.lname) ||
+            $scope.data.personnelNum === null || !angular.isDefined($scope.data.personnelNum) ||
+            $scope.data.password === null || !angular.isDefined($scope.data.password) ||
+            $scope.data.phoneNum === null || !angular.isDefined($scope.data.phoneNum) ||
+            $scope.data.email === null || !angular.isDefined($scope.data.email) ||
+            $scope.data.loc === null || !angular.isDefined($scope.data.loc) ||
+            $scope.data.depot === null || !angular.isDefined($scope.data.depot) ||
+            $scope.data.position === null || !angular.isDefined($scope.data.position))
+            alert("Please fill in every fields.");
+        else {
+
+            var link = 'http://theninjasheep.com/registration.php';
+            //pass all data to server
+            alert("Request sent");
+            $http({
+                url: link,
+                method: 'POST',
+                data: {
+                    fname: $scope.data.fname,
+                    lname: $scope.data.lname,
+                    personnelNum: $scope.data.personnelNum,
+                    password: $scope.data.password,
+                    phoneNum: $scope.data.phoneNum,
+                    email: $scope.data.email,
+                    location: $scope.data.loc.name,
+                    depot: $scope.data.depot,
+                    position: $scope.data.position
+                }
+            }).success(function (data, status, headers, config) {
+                $scope.response = data;
+                if (data === $scope.data.fname) {
+                    alert("Hello, " + data + "\nPlease Login in the next page.");
+                    $state.go('login');
+                } else if (status === 200) {
+                    alert("Sorry, database issue encountered; Please try again later.");
+                } else {
+                    alert(data + status);
+                }
+
+            }).error(function (data, status, headers, config) {
+                alert("Connection fails.");
+                //alert("Invalid ID or password.");
+                $scope.response = data;
+                $scope.response += " : " + status;
+            });
+        }
     };
 }])
 
@@ -70,8 +139,9 @@ function ($scope, $stateParams, $http, $state) {
 
     $scope.data = {};
     $scope.submit = function () {
-
-        var link = 'http://ebon1111.000webhostapp.com/login.php';
+        
+        var link = 'http://theninjasheep.com/login.php';
+        alert(link);
         alert("Request sent");
         $http({
             url: link,

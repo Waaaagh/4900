@@ -4,7 +4,7 @@
             <ion-list id="login-list1">
                 <label class="item item-input" id="login-input8" ng-class="{ 'has-errors' : loginForm.account.$invalid, 'no-errors' : loginForm.account.$valid}">
                     <span class="input-label">Personnel Number </span>
-                    <input type="text" name="account" placeholder="" ng-model="data.account" ng-minlength="7" ng-maxlength="7" required>
+                    <input type="text" name="account" placeholder="" ng-model="data.account" ng-minlength="6" ng-maxlength="7" required>
                 </label>
 
                 <div class="error-container" ng-messages="loginForm.account.$error">
@@ -14,7 +14,7 @@
                     </div>
                     <div class="error" ng-show="loginForm.account.$error.minlength">
                         <i class="ion-information-circled"></i>
-                        Personnel Number must be atleast 7 characters long!
+                        Personnel Number must be atleast 6 characters long!
                     </div>
                     <div class="error" ng-show="loginForm.account.$error.maxlength">
                         <i class="ion-information-circled"></i>
