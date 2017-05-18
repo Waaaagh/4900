@@ -1,0 +1,7 @@
+<ion-view title="Contacts" id="page3">
+    <ion-content padding="true" class="has-header" ng-controller="listCtrl">
+            <ion-list id="login-list1">
+                <ion-item ng-repeat="item in array" ui-sref="compose" ng-model="data.name">{{item.first_name}} {{item.last_name}}</ion-item>
+            </ion-list>
+    </ion-content>
+</ion-view>

@@ -44,6 +44,18 @@ angular.module('app.routes', [])
     controller: 'collectiveAgreementCtrl'
   })
 
+    .state('compose', {
+        url: '/compose',
+        templateUrl: 'templates/compose.html',
+        controller: 'composeCtrl'
+    })
+
+  .state('list', {
+      url: '/list',
+      templateUrl: 'templates/list.html',
+      controller: 'listCtrl'
+  })
+
 $urlRouterProvider.otherwise('/login')
 
   

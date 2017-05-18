@@ -1,0 +1,41 @@
+<ion-view title="Compose" id="page6" name="compose">
+    <ion-content padding="true" class="has-header">
+        <form id="compose-form" name="composeForm" novalidate="" class="list" ng-submit="compose()">
+            <ion-list id="login-list1">
+                <label class="item item-input" id="compose-input8" ng-class="{ 'has-errors' : composeForm.toEmail.$invalid, 'no-errors' : composeForm.toEmail.$valid }">
+                    <span class="input-label">To: </span>
+                    <input type="email" name="toEmail" ng-model="data.toEmail" ng-pattern = '/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' required>
+                </label>
+                <small class="error" ng-show="composeForm.toEmail.$error.required">
+                    email address is required.
+                </small>
+                <div class="error-container" ng-show="composeForm.toEmail.$dirty && composeForm.toEmail.$invalid">
+                    
+                    <small class="error" ng-show="composeForm.toEmail.$error.email">
+                        Please input a valid email.
+                    </small>
+                    
+                </div>
+                
+                <label class="item item-input" id="compose-input10">
+                    <span class="input-label">Subject: </span>
+                    <input type="text" name="toCcAndBcc" placeholder="" ng-model="data.subject">
+                        </label>
+                
+                
+                <label id="compose-input11" style="width:100% !important;">
+                    <textarea type="text" name="emailContent" placeholder="write content here" ng-model="data.emailContent" rows="15" style="width:100% !important;"></textarea>
+                </label>
+
+            </ion-list>
+            <div class="spacer" style="height: 30px;"></div>
+            <button style="bottom:0px" class="button button-dark  button-block" type="submit"ng-disabled="loginForm.$invalid">Send email</button>
+        </form>
+        <!-- For Debugging -->
+        <div class="card">
+            <div class="item item-text-wrap">
+                Response: <b ng-bind="response"></b>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -28,6 +28,38 @@ function ($scope, $stateParams, $http) {
 
 }])
 
+    .controller('composeCtrl', function ($scope, $http) {
+        var init = function () {
+
+
+
+
+            //            $scope.data.toEmail = "sksmszhdzk@gmail.com"
+
+        };
+
+        init();
+
+    })
+
+.controller('listCtrl', function ($scope, $http) {
+    var init = function () {
+        var link = 'http://ebon1111.000webhostapp.com/list.php'
+        $http({
+            url: link,
+            method: 'GET'
+        }).success(function (data) {
+
+            $scope.array = data;
+
+        }).error(function (data) {
+            alert("Connection fails.");
+        });
+    };
+
+    init();
+})
+
 .controller('registerCtrl', ['$scope', '$stateParams', '$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -69,10 +101,8 @@ function ($scope, $stateParams, $http, $state) {
         $scope.data.depot = null;
     }
 
-    $scope.regEx = "/^[0-9]{10,10}$/";
-
     $scope.submit = function () {
-         alert($scope.data.fname + "\n" + $scope.data.lname + "\n" + $scope.data.personnelNum + "\n" + $scope.data.password + "\n" + $scope.data.phoneNum + "\n" + $scope.data.loc.name + "\n" + $scope.data.depot + "\n" + $scope.data.position);
+        alert($scope.data.fname + "\n" + $scope.data.lname + "\n" + $scope.data.personnelNum + "\n" + $scope.data.password + "\n" + $scope.data.phoneNum + "\n" + $scope.data.email + "\n" + $scope.data.loc.name + "\n" + $scope.data.depot + "\n" + $scope.data.position);
 
         if ($scope.data.fname === null || !angular.isDefined($scope.data.fname) ||
             $scope.data.lname === null || !angular.isDefined($scope.data.lname) ||
@@ -85,8 +115,8 @@ function ($scope, $stateParams, $http, $state) {
             $scope.data.position === null || !angular.isDefined($scope.data.position))
             alert("Please fill in every fields.");
         else {
-
-            var link = 'http://theninjasheep.com/registration.php';
+            var link = 'http://ebon1111.000webhostapp.com/api.php';
+            // var link = 'http://theninjasheep.com/registration.php';
             //pass all data to server
             alert("Request sent");
             $http({
@@ -109,7 +139,7 @@ function ($scope, $stateParams, $http, $state) {
                     alert("Hello, " + data + "\nPlease Login in the next page.");
                     $state.go('login');
                 } else if (status === 200) {
-                    alert("Sorry, database issue encountered; Please try again later.");
+                    alert("Sorry, database issue encountered; Please try again later." + status);
                 } else {
                     alert(data + status);
                 }
@@ -139,9 +169,8 @@ function ($scope, $stateParams, $http, $state) {
 
     $scope.data = {};
     $scope.submit = function () {
-        
-        var link = 'http://theninjasheep.com/login.php';
-        alert(link);
+        var link = 'http://ebon1111.000webhostapp.com/login.php';
+        // var link = 'http://theninjasheep.com/login.php';
         alert("Request sent");
         $http({
             url: link,
@@ -149,11 +178,12 @@ function ($scope, $stateParams, $http, $state) {
             data: { account: $scope.data.account, password: $scope.data.password }
         }).success(function (data, status, headers, config) {
             $scope.response = data;
-            if (data !== "") {
+            if (data === $scope.data.account) {
                 // Implement: Clear the input box
                 $state.go('homePage');
-            } else {
-                alert("Invalid Personnel Number or Password.");
+            } else if (status === 200) {
+                alert(data);
+                //alert("Invalid Personnel Number or Password.");
             }
 
         }).error(function (data, status, headers, config) {
